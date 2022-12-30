@@ -17,8 +17,22 @@
     </header>
 
     <main>
-      <button id="open-modal">Add Book</button>
+      <button class="btn open-modal">Add Book</button>
       <div id="book-display-area"></div>
     </main>
+    <div id="modal">
+      <form action="#" >
+        <span id="modal-title">Add new book</span>
+        <input type="text" id="book-title" placeholder="Title" required>
+        <input type="text" id="book-author" placeholder="Author" required>
+        <input type="number" id="book-pages" placeholder="Pages" required>
+        <div id="read-group">
+          <label for="book-read">Have you read it?</label>
+        <input type="checkbox" id="book-read" >
+        </div>
+        <button type="submit" id="submit-button">Add</button>
+        </div>
+      </form>
+    </div>
   </body>
 </html>
