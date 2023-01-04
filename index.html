@@ -16,19 +16,20 @@
       </nav>
     </header>
 
-    <main>
-      <button class="btn open-modal">Add Book</button>
-      <div id="book-display-area"></div>
+    <main id="main">
+      <button id="add-book">Add Book</button>
+      <div id="book-display-area">
+      </div>
     </main>
     <div id="modal">
-      <form action="#" >
+      <form id="form" action="#" >
         <span id="modal-title">Add new book</span>
-        <input type="text" id="book-title" placeholder="Title" required>
-        <input type="text" id="book-author" placeholder="Author" required>
-        <input type="number" id="book-pages" placeholder="Pages" required>
+        <input type="text" id="book-title" placeholder="Title" >
+        <input type="text" id="book-author" placeholder="Author" >
+        <input type="number" id="book-pages" placeholder="Pages" >
         <div id="read-group">
           <label for="book-read">Have you read it?</label>
-        <input type="checkbox" id="book-read" >
+        <input type="checkbox" id="book-read" value="off" >
         </div>
         <button type="submit" id="submit-button">Add</button>
         </div>

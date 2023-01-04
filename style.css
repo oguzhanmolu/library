@@ -10,7 +10,7 @@ nav {
   width: 100vw;
   align-items: center;
   gap: 10px;
-  box-shadow: 2px 2px 5px black;
+  box-shadow: 3px 3px 5px black;
 }
 #icon {
   height: 75px;
@@ -29,7 +29,7 @@ main {
   height: 90vh;
 }
 
-.open-modal {
+#add-book {
   height: 50px;
   width: 100px;
   margin-top: 20px;
@@ -38,17 +38,17 @@ main {
   color: white;
   cursor: pointer;
 }
-.open-modal:hover {
-  filter: invert();
-}
 #book-display-area {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
   height: 750px;
-  width: 1750px;
+  width: 1700px;
   margin: auto;
   border-radius: 10px;
-  background-color: rgb(241, 241, 241);
 }
 #modal {
+  display: none;
   position: fixed;
   width: 300px;
   height: 250px;
@@ -57,7 +57,7 @@ main {
   transform: translate(-50%, -50%);
   text-align: center;
   border-radius: 10px;
-  background-color: white;
+  background-color: rgb(241, 241, 241);
   border: 1px solid black;
 }
 #modal-title {
@@ -71,4 +71,12 @@ input {
 #submit-button {
   padding: 10px;
   margin-top: 10px;
+}
+.book-card {
+  height: 300px;
+  width: 300px;
+  background-color: black;
+  color: white;
+  text-align: center;
+  border-radius: 10px;
 }
