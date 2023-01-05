@@ -72,11 +72,36 @@ input {
   padding: 10px;
   margin-top: 10px;
 }
+#submit-button:hover {
+  cursor: pointer;
+}
 .book-card {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
   height: 300px;
   width: 300px;
-  background-color: black;
+  background-color: rgb(36, 34, 34);
   color: white;
   text-align: center;
   border-radius: 10px;
+}
+.book-card > * {
+  margin: 10px 25px 10px 25px;
+}
+.green-button {
+  font-size: 1.25rem;
+  padding: 10px;
+  background-color: rgb(46, 180, 46);
+  color: white;
+}
+.red-button {
+  font-size: 1.25rem;
+  padding: 10px;
+  background-color: rgb(208, 79, 79);
+  color: white;
+}
+.remove-button {
+  padding: 10px;
+  font-size: 1.25rem;
 }
