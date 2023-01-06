@@ -105,3 +105,8 @@ input {
   padding: 10px;
   font-size: 1.25rem;
 }
+.green-button:hover,
+.red-button:hover,
+.remove-button:hover {
+  cursor: pointer;
+}
