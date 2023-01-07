@@ -30,7 +30,6 @@ btnSubmit.addEventListener('click', () => {
 
   if (inputBookTitle.value && inputBookAuthor.value && inputBookPages.value) {
     addBookToLibrary();
-    createBookCard();
   } else {
     alert('Please fill all information');
   }
@@ -43,8 +42,12 @@ function addBookToLibrary() {
     inputBookPages.value,
     inputBookReadStatus.checked
   );
-
-  myLibrary.push(newBook);
+  if (myLibrary.some((book) => book.title == newBook.title)) {
+    alert('Book already exists.');
+  } else {
+    myLibrary.push(newBook);
+    createBookCard();
+  }
 }
 const createBookCard = () => {
   const bookCard = document.createElement('div');
@@ -53,21 +56,14 @@ const createBookCard = () => {
   const pages = document.createElement('p');
   const btnReadStatus = document.createElement('button');
   const btnRemove = document.createElement('button');
+
   title.textContent = `${inputBookTitle.value}`;
   author.textContent = `${inputBookAuthor.value}`;
   pages.textContent = `${inputBookPages.value}`;
   btnRemove.textContent = 'Remove';
+
   bookCard.classList.add('book-card');
   btnRemove.classList.add('remove-button');
-
-  // Read button
-  if (inputBookReadStatus.checked === true) {
-    btnReadStatus.textContent = 'Read';
-    btnReadStatus.classList.add('green-button');
-  } else {
-    btnReadStatus.textContent = 'Not Read';
-    btnReadStatus.classList.add('red-button');
-  }
 
   bookDisplayArea.appendChild(bookCard);
   bookCard.appendChild(title);
@@ -94,6 +90,13 @@ const removeBookCard = (button) => {
 
 // Change read status
 const changeReadStatus = (button) => {
+  if (button.checked === true) {
+    button.textContent = 'Read';
+    button.classList.add('green-button');
+  } else {
+    button.textContent = 'Not Read';
+    button.classList.add('red-button');
+  }
   for (const book of myLibrary) {
     button.addEventListener('click', (e) => {
       if (book.title == e.target.parentNode.firstChild.textContent) {
