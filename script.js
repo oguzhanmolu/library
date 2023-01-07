@@ -43,6 +43,7 @@ function addBookToLibrary() {
     inputBookPages.value,
     inputBookReadStatus.checked
   );
+
   myLibrary.push(newBook);
 }
 const createBookCard = () => {
@@ -75,17 +76,39 @@ const createBookCard = () => {
   bookCard.appendChild(btnReadStatus);
   bookCard.appendChild(btnRemove);
 
+  changeReadStatus(btnReadStatus);
   removeBookCard(btnRemove);
 };
 
 // Remove book card
 const removeBookCard = (button) => {
   button.addEventListener('click', (e) => {
-    for (let i = 0; i < myLibrary.length; i++) {
-      if (myLibrary[i].title == e.target.parentNode.firstChild.textContent) {
-        myLibrary.splice(i, 1);
+    for (const book of myLibrary) {
+      if (book.title == e.target.parentNode.firstChild.textContent) {
+        myLibrary.splice(book.index, 1);
       }
     }
     e.target.parentNode.style.display = 'none';
   });
+};
+
+// Change read status
+const changeReadStatus = (button) => {
+  for (const book of myLibrary) {
+    button.addEventListener('click', (e) => {
+      if (book.title == e.target.parentNode.firstChild.textContent) {
+        if (book.read == true) {
+          e.target.classList.add('red-button');
+          e.target.classList.remove('green-button');
+          e.target.textContent = 'Not read';
+          book.read = !book.read;
+        } else {
+          e.target.classList.add('green-button');
+          e.target.classList.remove('red-button');
+          e.target.textContent = 'Read';
+          book.read = !book.read;
+        }
+      }
+    });
+  }
 };
