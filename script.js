@@ -11,31 +11,31 @@ let inputBookPages = document.querySelector('#book-pages');
 let inputBookReadStatus = document.querySelector('#book-read');
 let myLibrary = [];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-
+// Button functions
 btnAddBook.addEventListener('click', () => {
   bookForm.reset();
   bookModal.style.display = 'block';
   htmlMain.style.filter = 'blur(1px)';
 });
 
-btnSubmit.addEventListener('click', () => {
+btnSubmit.addEventListener('click', (e) => {
+  e.preventDefault();
   bookModal.style.display = 'none';
   htmlMain.style.filter = 'blur(0px)';
 
-  if (inputBookTitle.value && inputBookAuthor.value && inputBookPages.value) {
-    addBookToLibrary();
-  } else {
-    alert('Please fill all information');
-  }
+  inputBookTitle.value && inputBookAuthor.value && inputBookPages.value
+    ? addBook()
+    : alert('Please fill all information');
 });
 
-function addBookToLibrary() {
+// Add to library & book card
+function Book(title, author, pages, read) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
+function addBook() {
   let newBook = new Book(
     inputBookTitle.value,
     inputBookAuthor.value,
@@ -49,6 +49,7 @@ function addBookToLibrary() {
     createBookCard();
   }
 }
+
 const createBookCard = () => {
   const bookCard = document.createElement('div');
   const title = document.createElement('p');
@@ -72,8 +73,35 @@ const createBookCard = () => {
   bookCard.appendChild(btnReadStatus);
   bookCard.appendChild(btnRemove);
 
-  changeReadStatus(btnReadStatus);
+  changeReadStatus(btnReadStatus, inputBookReadStatus);
   removeBookCard(btnRemove);
+};
+
+// Add read status
+const changeReadStatus = (button, checkbox) => {
+  if (checkbox.checked === true) {
+    button.textContent = 'Read';
+    button.classList.add('green-button');
+  } else {
+    button.textContent = 'Not Read';
+    button.classList.add('red-button');
+  }
+  // Change read status
+  for (const book of myLibrary) {
+    button.addEventListener('click', (e) => {
+      if (book.read == true) {
+        e.target.classList.add('red-button');
+        e.target.classList.remove('green-button');
+        e.target.textContent = 'Not read';
+        book.read = !book.read;
+      } else {
+        e.target.classList.add('green-button');
+        e.target.classList.remove('red-button');
+        e.target.textContent = 'Read';
+        book.read = !book.read;
+      }
+    });
+  }
 };
 
 // Remove book card
@@ -86,32 +114,4 @@ const removeBookCard = (button) => {
     }
     e.target.parentNode.style.display = 'none';
   });
-};
-
-// Change read status
-const changeReadStatus = (button) => {
-  if (button.checked === true) {
-    button.textContent = 'Read';
-    button.classList.add('green-button');
-  } else {
-    button.textContent = 'Not Read';
-    button.classList.add('red-button');
-  }
-  for (const book of myLibrary) {
-    button.addEventListener('click', (e) => {
-      if (book.title == e.target.parentNode.firstChild.textContent) {
-        if (book.read == true) {
-          e.target.classList.add('red-button');
-          e.target.classList.remove('green-button');
-          e.target.textContent = 'Not read';
-          book.read = !book.read;
-        } else {
-          e.target.classList.add('green-button');
-          e.target.classList.remove('red-button');
-          e.target.textContent = 'Read';
-          book.read = !book.read;
-        }
-      }
-    });
-  }
 };
