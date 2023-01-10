@@ -112,6 +112,6 @@ const removeBookCard = (button) => {
         myLibrary.splice(book.index, 1);
       }
     }
-    e.target.parentNode.style.display = 'none';
+    e.target.parentNode.remove();
   });
 };
